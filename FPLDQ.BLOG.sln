@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.BLOG", "FPLDQ.BLOG\FPLDQ.BLOG.csproj", "{B93473F7-BAD5-42D3-9423-A14003648E83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.Bussiness", "FPLDQ.bussiness\FPLDQ.Bussiness.csproj", "{4B506819-AE6C-4884-B5C7-28C4C6CB8639}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.Entity", "FPLDQ.Entity\FPLDQ.Entity.csproj", "{83AE7D98-1604-4FA4-81D0-47F92E02EACE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.IService", "FPLDQ.IService\FPLDQ.IService.csproj", "{9DE8F307-16F0-4D57-92FB-5FD64DCA0E00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.Model", "FPLDQ.Model\FPLDQ.Model.csproj", "{522ABA68-86F9-4020-B5DA-C3C6A36B2283}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.Service", "FPLDQ.Service\FPLDQ.Service.csproj", "{3CB5CE7A-5238-49E5-9AF0-34317AEFBFE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FPLDQ.Token", "FPLDQ.Token\FPLDQ.Token.csproj", "{16FB7A80-3447-442E-98C5-C96ADFF188A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B93473F7-BAD5-42D3-9423-A14003648E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93473F7-BAD5-42D3-9423-A14003648E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93473F7-BAD5-42D3-9423-A14003648E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93473F7-BAD5-42D3-9423-A14003648E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B506819-AE6C-4884-B5C7-28C4C6CB8639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B506819-AE6C-4884-B5C7-28C4C6CB8639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B506819-AE6C-4884-B5C7-28C4C6CB8639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B506819-AE6C-4884-B5C7-28C4C6CB8639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83AE7D98-1604-4FA4-81D0-47F92E02EACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83AE7D98-1604-4FA4-81D0-47F92E02EACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83AE7D98-1604-4FA4-81D0-47F92E02EACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83AE7D98-1604-4FA4-81D0-47F92E02EACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE8F307-16F0-4D57-92FB-5FD64DCA0E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE8F307-16F0-4D57-92FB-5FD64DCA0E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE8F307-16F0-4D57-92FB-5FD64DCA0E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE8F307-16F0-4D57-92FB-5FD64DCA0E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{522ABA68-86F9-4020-B5DA-C3C6A36B2283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{522ABA68-86F9-4020-B5DA-C3C6A36B2283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{522ABA68-86F9-4020-B5DA-C3C6A36B2283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{522ABA68-86F9-4020-B5DA-C3C6A36B2283}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB5CE7A-5238-49E5-9AF0-34317AEFBFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB5CE7A-5238-49E5-9AF0-34317AEFBFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB5CE7A-5238-49E5-9AF0-34317AEFBFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB5CE7A-5238-49E5-9AF0-34317AEFBFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FB7A80-3447-442E-98C5-C96ADFF188A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FB7A80-3447-442E-98C5-C96ADFF188A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FB7A80-3447-442E-98C5-C96ADFF188A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FB7A80-3447-442E-98C5-C96ADFF188A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3910886D-63D1-4E29-8053-B3F2B5A4FD60}
+	EndGlobalSection
+EndGlobal

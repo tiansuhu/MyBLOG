@@ -8,8 +8,14 @@ using System.Text;
 
 namespace FPLDQ.Service
 {
-    public class baseService 
+    public class baseService<T> 
     {
-        
+        /// <summary>
+        /// 每个实例都需要实现初始化表
+        /// </summary>
+        public void initTable()
+        {
+            BaseDB.GetClient().CodeFirst.InitTables(typeof(T));
+        }
     }
 }

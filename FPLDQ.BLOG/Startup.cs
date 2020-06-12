@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,8 +28,38 @@ namespace FPLDQ.BLOG
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
 
+            services.AddControllers();
+            #region jwt
+            services.AddSingleton<IMemoryCache>(factory =>
+            {
+                var cache = new MemoryCache(new MemoryCacheOptions());
+                return cache;
+            });
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("System", policy => policy.RequireClaim("SystemType").Build());
+                options.AddPolicy("Client", policy => policy.RequireClaim("ClientType").Build());
+                options.AddPolicy("Admin", policy => policy.RequireClaim("AdminType").Build());
+
+                //options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+                //{
+                //    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                //    policy.RequireClaim("sub");
+                //});
+            });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+            //        options.Authority = "http://localhost:5000";
+            //        options.RequireHttpsMetadata = false;
+            //        options.Audience = "grpc1";
+            //    });
+
+
+            #endregion 
 
             #region Swagger
             services.AddSwaggerGen(c =>
@@ -46,19 +78,7 @@ namespace FPLDQ.BLOG
                 c.IncludeXmlComments(xmlPath,true);
 
                
-                // OpenApiSecurityRequirement security =
-                //new  OpenApiSecurityRequirement().Add( 
-                //    new OpenApiSecurityScheme { Name="Bearer", In=ParameterLocation.Header}
-                //    ,new List<string>().Add(""));
-                
-                //c.AddSecurityRequirement(security);//添加一个必须的全局安全信息，和AddSecurityDefinition方法指定的方案名称要一致，这里是Bearer。
-                //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                //{
-                //    Description = "JWT授权(数据将在请求头中进行传输) 参数结构: \"Authorization: Bearer {token}\"",
-                //    Name = "Authorization",//jwt默认的参数名称
-                //    In = "header",//jwt默认存放Authorization信息的位置(请求头中)
-                //    Type = "apiKey"
-                //});
+               
 
 
             });
@@ -74,9 +94,14 @@ namespace FPLDQ.BLOG
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+
 
             app.UseRouting();
+
+            #region TokenAuth jwt认证
+            app.UseMiddleware<AuthHelper.TokenAuth>();
+            #endregion
 
             app.UseAuthorization();
 

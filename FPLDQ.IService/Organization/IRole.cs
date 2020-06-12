@@ -5,7 +5,10 @@ using System.Text;
 
 namespace FPLDQ.IService
 {
-    public interface IUser:IbaseService<User>
+    /// <summary>
+    /// 角色接口
+    /// </summary>
+    public interface IRole:IbaseService<Role>
     {
 
     }

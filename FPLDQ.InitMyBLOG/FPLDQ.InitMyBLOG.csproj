@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FPLDQ.IService\FPLDQ.IService.csproj" />
+    <ProjectReference Include="..\FPLDQ.bussiness\FPLDQ.Bussiness.csproj" />
+    <ProjectReference Include="..\FPLDQ.Entity\FPLDQ.Entity.csproj" />
     <ProjectReference Include="..\FPLDQ.Service\FPLDQ.Service.csproj" />
   </ItemGroup>
 

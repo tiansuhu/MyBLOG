@@ -9,6 +9,6 @@ namespace FPLDQ.Model
     /// </summary>
     public class BaseDBConfig
     {
-        public static string ConnectionString = "server=.;uid=sa;pwd=Admin;database=FPLDQBLOG";
+        public static string ConnectionString = "server=.;uid=sa;pwd=123456;database=FPLDQBLOG";
     }
 }

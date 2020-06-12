@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enum\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\FPLDQ.Entity\FPLDQ.Entity.csproj" />
     <ProjectReference Include="..\SqlSugar\SqlSugar.csproj" />
   </ItemGroup>
 

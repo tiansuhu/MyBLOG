@@ -14,7 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FPLDQ.bussiness\FPLDQ.Bussiness.csproj" />
+    <ProjectReference Include="..\FPLDQ.Entity\FPLDQ.Entity.csproj" />
+    <ProjectReference Include="..\FPLDQ.Model\FPLDQ.Model.csproj" />
+    <ProjectReference Include="..\FPLDQ.Token\FPLDQ.Token.csproj" />
   </ItemGroup>
 
 </Project>

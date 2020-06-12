@@ -7,7 +7,7 @@ namespace FPLDQ.Model
     /// <summary>
     /// 通用返回消息类
     /// </summary>
-    class MessageModel<T>
+    public class MessageModel<T>
     {
         /// <summary>
         /// 操作是否成功

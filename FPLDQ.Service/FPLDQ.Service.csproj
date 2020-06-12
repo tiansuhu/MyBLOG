@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FPLDQ.Common\FPLDQ.Common.csproj" />
     <ProjectReference Include="..\FPLDQ.IService\FPLDQ.IService.csproj" />
     <ProjectReference Include="..\FPLDQ.Model\FPLDQ.Model.csproj" />
+    <ProjectReference Include="..\FPLDQ.Token\FPLDQ.Token.csproj" />
   </ItemGroup>
 
 </Project>

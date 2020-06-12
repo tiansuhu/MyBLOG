@@ -24,7 +24,7 @@ namespace FPLDQ.IService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T get(long id);
+        T get(string id);
 
         /// <summary>
         /// 更新
@@ -38,7 +38,7 @@ namespace FPLDQ.IService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool delete(long id);
+        bool delete(string id);
 
         /// <summary>
         /// 增加实体
@@ -46,6 +46,8 @@ namespace FPLDQ.IService
         /// <param name="et"></param>
         /// <returns></returns>
         bool add(T et);
+
+        void initTable();
 
     }
 }

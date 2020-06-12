@@ -98,7 +98,16 @@ namespace FPLDQ.Service
             TokenModel m = new TokenModel();
             m.Uid = u.id;
             m.Uname = u.userCode;
-            m.Sub = "admin";
+            if (u.isAdmin)
+            {
+                m.Sub = "Admin";
+            }
+
+            else
+            {
+                m.Sub = "Client";
+            }
+
             TimeSpan timeSpan = _timeSpan;
             string token = BLOGPIToken.IssueJWT(m, timeSpan, timeSpan);
             return token;

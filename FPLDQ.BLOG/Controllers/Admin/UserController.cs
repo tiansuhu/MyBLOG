@@ -15,7 +15,7 @@ namespace FPLDQ.BLOG.Controllers.Admin
     /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Admin"),Authorize(Policy = "Client")]   
     public class UserController: ControllerBase
     {
         private UserManager userManager = new UserManager();

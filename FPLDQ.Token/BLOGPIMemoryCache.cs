@@ -23,6 +23,8 @@ namespace FPLDQ.Token
             return _cache.TryGetValue(key, out cached);
         }
 
+
+
         /// <summary>
         /// 获取缓存
         /// </summary>
@@ -62,6 +64,20 @@ namespace FPLDQ.Token
                     );
 
             return Exists(key);
+        }
+
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool DeleteMemoryCache(string key) {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+            _cache.Remove(key);
+            return true;
         }
     }
 }

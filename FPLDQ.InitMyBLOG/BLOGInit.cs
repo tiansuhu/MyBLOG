@@ -12,7 +12,7 @@ namespace FPLDQ.InitMyBLOG
         public static void init() {
 
             OrganizationInit.init();//初始化组织
-
+            UserInit.init();//初始化用户
         }
     }
 }

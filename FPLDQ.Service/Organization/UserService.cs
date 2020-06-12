@@ -21,6 +21,12 @@ namespace FPLDQ.Service
         /// <returns></returns>
         public bool add(User et)
         {
+            //添加用户的时候对用户密码进行加密操作。
+            string userpassword = string.Empty;
+            string md5str = Common.SecurityHelper.MD5("000000", Encoding.UTF8);
+            userpassword = Common.SecurityHelper.Base64Encode(md5str);
+            et.isActivy = true;//添加用户默认是激活状态
+            et.password = userpassword;
             return userClent.Insert(et);
         }
         /// <summary>
@@ -79,7 +85,7 @@ namespace FPLDQ.Service
         /// <returns></returns>
         public User getUserByCode(string userCode, bool isActivity)
         {
-            return userClent.AsQueryable().Where(item => item.userCode == userCode&& item.isActivy == isActivity).First();
+            return userClent.AsQueryable().Where(item => item.userCode == userCode && item.isActivy == isActivity).First();
         }
 
         /// <summary>
@@ -87,7 +93,7 @@ namespace FPLDQ.Service
         /// </summary>
         /// <param name="u"></param>
         /// <returns></returns>
-        public string getUserToken(User u,TimeSpan _timeSpan)
+        public string getUserToken(User u, TimeSpan _timeSpan)
         {
             TokenModel m = new TokenModel();
             m.Uid = u.id;
@@ -96,6 +102,29 @@ namespace FPLDQ.Service
             TimeSpan timeSpan = _timeSpan;
             string token = BLOGPIToken.IssueJWT(m, timeSpan, timeSpan);
             return token;
+
+        }
+
+        /// <summary>
+        /// 销毁用户令牌
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool unInitUserToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new ArgumentNullException(nameof(token));
+            }
+
+            if (BLOGPIMemoryCache.Exists(token))
+            {
+                return BLOGPIMemoryCache.DeleteMemoryCache(token);
+            }
+            else
+            {
+                return true;
+            }
 
         }
 
@@ -109,14 +138,15 @@ namespace FPLDQ.Service
         public bool update(User et)
         {
             //不更新为null的列
-           return  userClent.AsUpdateable(et).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommand()>0;
+            return userClent.AsUpdateable(et).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommand() > 0;
         }
 
         public valiableUserResult<User> valiableUser(string userCode, string userPassword)
         {
 
             valiableUserResult<User> result = new valiableUserResult<User>();
-            if (string.IsNullOrEmpty(userCode)) {
+            if (string.IsNullOrEmpty(userCode))
+            {
                 result.success = false;
                 result.Msg = "用户账号为空";
                 result.Data = null;
@@ -139,17 +169,19 @@ namespace FPLDQ.Service
 
                 return result;
             }
-            if (string.IsNullOrEmpty(user.password)) {
+            if (string.IsNullOrEmpty(user.password))
+            {
                 result.success = false;
                 result.Msg = "密码为空";
                 result.Data = null;
                 return result;
             }
-           
-            string md5str =  Common.SecurityHelper.MD5(userPassword, Encoding.UTF8);
+
+            string md5str = Common.SecurityHelper.MD5(userPassword, Encoding.UTF8);
             string password = Common.SecurityHelper.Base64Encode(md5str);
 
-            if (password != user.password) {
+            if (password != user.password)
+            {
                 result.success = false;
                 result.Msg = "用户账号密码不正确";
                 result.Data = user;

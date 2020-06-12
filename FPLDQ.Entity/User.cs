@@ -84,7 +84,7 @@ namespace FPLDQ.Entity
         /// <summary>
         /// 密码
         /// </summary>
-        [SugarColumn(IsNullable = true)]
+        [SugarColumn(IsNullable = false)]
         public string password { get; set; }
 
 

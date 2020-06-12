@@ -37,5 +37,12 @@ namespace FPLDQ.IService
         /// <returns></returns>
         public string getUserToken(User u,TimeSpan timeSpan);
 
+        /// <summary>
+        /// 销毁用户令牌
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public bool unInitUserToken(string token);
+
     }
 }

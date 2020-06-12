@@ -74,5 +74,14 @@ namespace FPLDQ.Bussiness.Admin
         public string  getuserToken(User u, TimeSpan timeSpan) {
             return userService.getUserToken(u, timeSpan);
         }
+
+        /// <summary>
+        /// 销毁用户令牌
+        /// </summary>
+        /// <param name="token">令牌token</param>
+        /// <returns></returns>
+        public bool unInitUserToken(string token) {
+            return userService.unInitUserToken(token);
+        }
     }
 }

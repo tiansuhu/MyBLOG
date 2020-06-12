@@ -20,7 +20,7 @@ namespace FPLDQ.InitMyBLOG
             user.userName = "Admin";
             user.isActivy = true;
             user.isAdmin = true;
-
+            user.password = "NjcwQjE0NzI4QUQ5OTAyQUVDQkEzMkUyMkZBNEY2QkQ=";//000000加密后的数据
             //初始化表
             manager.InitTable();
 

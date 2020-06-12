@@ -23,7 +23,7 @@ namespace FPLDQ.BLOG.Controllers
         /// <param name="userCode">用户账号</param>
         /// <param name="userPassword">用户密码</param>
         /// <returns></returns>
-        [HttpPost("Login")]
+        [HttpPost("LoginIn")]
         public ApiResult<LoginUserModel> Login(string userCode, string userPassword) {
             ApiResult<LoginUserModel> result = new ApiResult<LoginUserModel>();
             valiableUserResult<User> valiableUser =  userManager.valiableUser(userCode, userPassword);
@@ -50,6 +50,33 @@ namespace FPLDQ.BLOG.Controllers
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 登出
+        /// </summary>
+        /// <param name="userCode">用户代码</param>
+        /// <param name="token">用户令牌</param>
+        /// <returns></returns>
+        [HttpGet("LoginOut")]
+        public ApiResult<bool> LoginOut(string userCode ,string token) {
+            ApiResult<bool> apiResult = new ApiResult<bool>();
+            if (string.IsNullOrEmpty(token))
+            {
+                apiResult.Code = ApiResultStatu.Error;
+                apiResult.Msg = "token为空";
+                apiResult.Success = false;
+                apiResult.Data = false;
+                return apiResult;
+            }
+
+            userManager.unInitUserToken(token);
+            apiResult.Code = ApiResultStatu.OK;
+            apiResult.Msg = userCode + "退出成功";
+            apiResult.Success = true;
+            apiResult.Data = true;
+            return apiResult;
+
         }
     }
 }

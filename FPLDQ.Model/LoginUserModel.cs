@@ -17,5 +17,10 @@ namespace FPLDQ.Model
         /// 令牌
         /// </summary>
         public string userToken { get; set; }
+        /// <summary>
+        /// 用户所属组织
+        /// </summary>
+        public string  orgId{get;set;}
+
     }
 }

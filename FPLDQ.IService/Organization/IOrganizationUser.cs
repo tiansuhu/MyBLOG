@@ -7,5 +7,6 @@ namespace FPLDQ.IService
 {
     public interface IOrganizationUser:IbaseService<OrganizationUser>
     {
+
     }
 }

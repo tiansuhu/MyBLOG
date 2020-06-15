@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FPLDQ.Common\FPLDQ.Common.csproj" />
     <ProjectReference Include="..\FPLDQ.Entity\FPLDQ.Entity.csproj" />
     <ProjectReference Include="..\SqlSugar\SqlSugar.csproj" />
   </ItemGroup>

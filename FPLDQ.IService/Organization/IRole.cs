@@ -10,6 +10,7 @@ namespace FPLDQ.IService
     /// </summary>
     public interface IRole:IbaseService<Role>
     {
+         
 
     }
 }

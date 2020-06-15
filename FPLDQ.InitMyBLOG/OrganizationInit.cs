@@ -21,12 +21,14 @@ namespace FPLDQ.InitMyBLOG
             org.orgCode = "MyCompany";
             org.orgName = "我的公司";
             org.isroot = true;
-            
             //初始化表
             manager.InitTable();
-            
-            //插入数据
-            manager.Add(org);
+
+            //User vorgr = manager.(org.id);//验证当前user是否已经存在
+            //if (vuser == null || string.IsNullOrEmpty(vuser.id))
+
+                //插入数据
+                manager.Add(org);
 
         }
     }

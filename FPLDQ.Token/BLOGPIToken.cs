@@ -27,7 +27,7 @@ namespace FPLDQ.Token
             Claim[] claims = new Claim[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub,tokenModel.Sub),//Subject,
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),//JWT ID,JWT的唯一标识
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),//JWT ID,JWT的唯一标识 待讨论是不是应该用用户的ID来
                 new Claim(JwtRegisteredClaimNames.Iat, UTC.ToString(), ClaimValueTypes.Integer64),//Issued At，JWT颁发的时间，采用标准unix时间，用于验证过期
             };
 

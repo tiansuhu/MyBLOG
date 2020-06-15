@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using FPLDQ.Entity;
 using FPLDQ.Bussiness.Admin;
 using Microsoft.AspNetCore.Authorization;
+using FPLDQ.Token.Model;
+using FPLDQ.Common;
 
 namespace FPLDQ.BLOG.Controllers.Admin
 {
@@ -15,16 +17,21 @@ namespace FPLDQ.BLOG.Controllers.Admin
     /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
-    [Authorize(Policy = "Admin"),Authorize(Policy = "Client")]   
-    public class UserController: ControllerBase
+    [Authorize(Policy = "Admin")]   
+    public class UserController: ControlBase
     {
         private UserManager userManager = new UserManager();
         /// <summary>
         /// 获取用户信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("GetUserByID")]
         public ApiResult<User> GetUserByID(string id) {
+
+           TokenModel m = this.GetCurrentUser();
+
+            NLogHelp.WriteInfo("用户开始访问。。。");
+
             ApiResult<User> ApiResult = new ApiResult<User>();
             User u = userManager.GetUserByID(id);
             ApiResult.Data = u;
@@ -40,7 +47,6 @@ namespace FPLDQ.BLOG.Controllers.Admin
         /// <returns></returns>
         [HttpPost("AddUser")]
         public ApiResult<bool> AddUser(User u) {
-
             ApiResult<bool> apiResult = new ApiResult<bool>();
             User user = u;
             user.id = System.Guid.NewGuid().ToString().ToLower();
@@ -51,6 +57,26 @@ namespace FPLDQ.BLOG.Controllers.Admin
             apiResult.Data = res;
             return apiResult;
 
+        }
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("AddUserModel")]
+        public ApiResult<bool> AddUser(UserModel model) {
+
+            ApiResult<bool> apiResult = new ApiResult<bool>();
+            model.user.id = Guid.NewGuid().ToString().ToLower();
+            model.organizationUser.id = Guid.NewGuid().ToString().ToLower();
+            apiResult.Success = userManager.AddUser(model);
+            if (apiResult.Success)
+            {
+                apiResult.Code = ApiResultStatu.OK;
+            }
+            else
+                apiResult.Code = ApiResultStatu.Error;
+            return apiResult;
         }
 
         /// <summary>

@@ -43,6 +43,12 @@ namespace FPLDQ.IService
         /// <param name="token"></param>
         /// <returns></returns>
         public bool unInitUserToken(string token);
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Add(UserModel model);
 
     }
 }

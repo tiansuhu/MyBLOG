@@ -34,6 +34,15 @@ namespace FPLDQ.Bussiness.Admin
         }
 
         /// <summary>
+        /// 增加user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddUser(UserModel model) {
+            return userService.Add(model);
+        }
+
+        /// <summary>
         /// 更新user 
         /// </summary>
         /// <param name="user">user对象</param>

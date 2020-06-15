@@ -8,4 +8,8 @@
     <Folder Include="Common\FileHelper\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
+  </ItemGroup>
+
 </Project>

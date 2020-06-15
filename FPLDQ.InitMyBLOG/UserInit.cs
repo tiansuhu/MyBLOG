@@ -24,7 +24,9 @@ namespace FPLDQ.InitMyBLOG
             //初始化表
             manager.InitTable();
 
-            //插入数据
+            User vuser = manager.GetUserByID(user.id);//验证当前user是否已经存在
+            if (vuser == null || string.IsNullOrEmpty(vuser.id)) 
+            //不存在 就插入数据
             manager.AddUser(user);
 
         }

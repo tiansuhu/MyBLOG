@@ -18,6 +18,10 @@ namespace FPLDQ.Token.Model
         /// </summary>
         public string Uid { get; set; }
         /// <summary>
+        /// 用户账号
+        /// </summary>
+        public string Ucode { get; set; }
+        /// <summary>
         /// 用户名
         /// </summary>
         public string Uname { get; set; }

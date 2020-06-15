@@ -13,7 +13,7 @@ namespace FPLDQ.BLOG.Controllers
     /// 登录页面
     /// </summary>
     [ApiController]
-    [Route("api/admin/[controller]")]
+    [Route("api/Login/[controller]")]
     public class LoginController
     {
         private UserManager userManager = new UserManager();

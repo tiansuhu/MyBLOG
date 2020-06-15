@@ -107,7 +107,8 @@ namespace FPLDQ.Service
             {
                 m.Sub = "Client";
             }
-
+            m.Ucode = u.userCode;
+            m.Phone = u.userPhone;
             TimeSpan timeSpan = _timeSpan;
             string token = BLOGPIToken.IssueJWT(m, timeSpan, timeSpan);
             return token;
@@ -149,7 +150,12 @@ namespace FPLDQ.Service
             //不更新为null的列
             return userClent.AsUpdateable(et).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommand() > 0;
         }
-
+        /// <summary>
+        /// 通过用户账号和密码验证用户是否合法
+        /// </summary>
+        /// <param name="userCode"></param>
+        /// <param name="userPassword"></param>
+        /// <returns></returns>
         public valiableUserResult<User> valiableUser(string userCode, string userPassword)
         {
 
@@ -202,6 +208,44 @@ namespace FPLDQ.Service
             result.Data = user;
             return result;
 
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Add(UserModel model) {
+            //如果为空 返回false
+            if (model == null)
+                return false;
+
+            if (model.user == null)
+                return false;
+
+            if (model.organizationUser == null)
+                return false;
+
+            using (SqlSugarClient db = BaseDB.GetClient()) {
+                try
+                {
+                    //db.BeginTran();//开启事务
+                    //特别说明：在事务中，默认情况下是使用锁的，也就是说在当前事务没有结束前，其他的任何查询都需要等待
+                    //ReadCommitted：在正在读取数据时保持共享锁，以避免脏读，但是在事务结束之前可以更改数据，从而导致不可重复的读取或幻像数据。
+                    //db.BeginTran(System.Data.IsolationLevel.ReadCommitted); //重载指定事务的级别
+                    db.BeginTran();//开始事物
+                    db.Insertable<User>(model.user);
+                    db.Insertable<OrganizationUser>(model.organizationUser);
+                    db.CommitTran();//提交事务
+                    return true;
+                }
+                catch (Exception ex) {
+                    db.RollbackTran();//回滚
+                    return false;
+                }
+
+
+            }
         }
     }
 }

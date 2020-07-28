@@ -9,7 +9,7 @@ using System.Text;
 
 namespace FPLDQ.Service
 {
-    public class RoleService : baseService<Role>, IRole
+    class RoleService : baseService<Role>, IRole
     {
         SimpleClient<Role> roleClient = new SimpleClient<Role>(BaseDB.GetClient());
         public bool add(Role et)

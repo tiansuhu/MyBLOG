@@ -50,5 +50,18 @@ namespace FPLDQ.IService
         /// <returns></returns>
         public bool Add(UserModel model);
 
+        /// <summary>
+        /// 通过用户编码查询用户
+        /// </summary>
+        /// <param name="userCode">用户编码</param>
+        /// <returns></returns>
+        public UserModel getUserModelByCode(string userCode);
+        /// <summary>
+        /// 通过用户id查询用户
+        /// </summary>
+        /// <param name="userId">用户id</param>
+        /// <returns></returns>
+        public UserModel getUserModelById(string userId);
+
     }
 }

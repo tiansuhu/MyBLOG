@@ -5,35 +5,80 @@ using System.Text;
 
 namespace FPLDQ.Entity
 {
-   public  class baseEntity
-   {
+    public class baseEntity
+    {
+        private string _id = string.Empty;
+
         /// <summary>
         /// entity 的基类 
         /// </summary>
         //[SugarColumn(ColumnName = "id",IsNullable = false, IsPrimaryKey = true,)]
-        [SugarColumn(ColumnName ="id",IsNullable = false, IsPrimaryKey = true)]
-        public string id { get; set; }
+        [SugarColumn(ColumnName = "id", IsNullable = false, IsPrimaryKey = true)]
+        public string id
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this._id))
+                {
+                    //如果为空的话 设置个默认的值
+                    this._id = Guid.NewGuid().ToString().ToLower();
+                }
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
 
         /// <summary>
         /// 创建人
         /// </summary>
-        [SugarColumn(ColumnName = "creater",IsNullable = true)]
+        [SugarColumn(ColumnName = "creater", IsNullable = true)]
         public string creater { get; set; }
+
+        private DateTime _createtime;
         /// <summary>
         /// 创建时间
         /// </summary>
         [SugarColumn(ColumnName = "creatertime", IsNullable = true)]
-        public DateTime createrTime { get; set; }
+        public DateTime createrTime {
+            get {
+                //没有值就默认当前时间
+                if (_createtime == null) {
+                    _createtime = System.DateTime.Now;
+                }
+                return _createtime;
+            }
+            set {
+                _createtime = value;
+            }
+        }
         /// <summary>
         /// 修改人
         /// </summary>
         [SugarColumn(ColumnName = "modifier", IsNullable = true)]
         public string modifier { get; set; }
+
+        private DateTime _modifiedtime;
+
         /// <summary>
         /// 修改时间
         /// </summary>
         [SugarColumn(ColumnName = "modifiedtime", IsNullable = true)]
-        public DateTime modifiedTime { get; set; }
+        public DateTime modifiedTime {
+            get {
+                //没有值就默认当前时间
+                if (_modifiedtime == null)
+                {
+                    _modifiedtime = System.DateTime.Now;
+                }
+                return _modifiedtime;
+            }
+            set {
+                _modifiedtime = value;
+            }
+        }
         /// <summary>
         /// 扩展字段1
         /// </summary>

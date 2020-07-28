@@ -12,8 +12,8 @@ namespace FPLDQ.Bussiness.Admin
     /// user 操作服务
     /// </summary>
     public class UserManager
-    {
-        private IUser userService = new UserService();
+    { 
+        private IUser userService = OrganizationFactory.CreateFactory().GetUserService();
 
         /// <summary>
         /// 获取userid

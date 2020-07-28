@@ -13,10 +13,19 @@ namespace FPLDQ.BLOG.Controllers
     /// 登录页面
     /// </summary>
     [ApiController]
-    [Route("api/Login/[controller]")]
+    [Route("api/[controller]")]
     public class LoginController
     {
         private UserManager userManager = new UserManager();
+
+        private object GetPropertyValue(object info, string field)
+        {
+            if (info == null) return null;
+            Type t = info.GetType();
+            IEnumerable<System.Reflection.PropertyInfo> property = from pi in t.GetProperties() where pi.Name.ToLower() == field.ToLower() select pi;
+            return property.First().GetValue(info, null);
+        }
+
         /// <summary>
         /// 用户登录
         /// </summary>
@@ -24,7 +33,12 @@ namespace FPLDQ.BLOG.Controllers
         /// <param name="userPassword">用户密码</param>
         /// <returns></returns>
         [HttpPost("LoginIn")]
-        public ApiResult<LoginUserModel> Login(string userCode, string userPassword) {
+        public ApiResult<LoginUserModel> Login( [FromBody] object values)
+        {//string userCode, string userPassword) {
+            var jObject = Newtonsoft.Json.Linq.JObject.Parse(values.ToString());
+            string userCode = jObject["userCode"].ToString();
+            //string userCode = this.GetPropertyValue(values, "userCode") + string.Empty;
+            string userPassword = jObject["userPassword"].ToString();
             ApiResult<LoginUserModel> result = new ApiResult<LoginUserModel>();
             valiableUserResult<User> valiableUser =  userManager.valiableUser(userCode, userPassword);
             if (!valiableUser.success)
@@ -45,7 +59,7 @@ namespace FPLDQ.BLOG.Controllers
                 loginUser.userName = valiableUser.Data.userName;
                 loginUser.userLoginTime = System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                  //给用户派发令牌 30分钟过期
-                loginUser.userToken = userManager.getuserToken(valiableUser.Data,new TimeSpan(0,30,0));
+                loginUser.userToken = "FPLDQBearer "+ userManager.getuserToken(valiableUser.Data,new TimeSpan(0,30,0));
                 result.Data = loginUser;
             }
 

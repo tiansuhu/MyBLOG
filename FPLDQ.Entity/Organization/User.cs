@@ -87,6 +87,12 @@ namespace FPLDQ.Entity
         [SugarColumn(IsNullable = false)]
         public string password { get; set; }
 
+        /// <summary>
+        /// 用户头像地址
+        /// </summary>
+        [SugarColumn(IsNullable =true)]
+        public string imgUrl { get; set; }
+
 
     }
 }

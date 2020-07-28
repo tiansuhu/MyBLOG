@@ -8,7 +8,7 @@ using System.Text;
 
 namespace FPLDQ.Service
 {
-    public class baseService<T> 
+    class baseService<T> 
     {
         /// <summary>
         /// 每个实例都需要实现初始化表

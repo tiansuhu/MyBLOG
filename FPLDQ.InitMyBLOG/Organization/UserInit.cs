@@ -10,6 +10,8 @@ namespace FPLDQ.InitMyBLOG
     {
         private static UserManager manager = new UserManager();
 
+        private static OrganizationUserManager orgUsrManager = new OrganizationUserManager();
+
         public static void init()
         {
             User user = new User();
@@ -28,6 +30,24 @@ namespace FPLDQ.InitMyBLOG
             if (vuser == null || string.IsNullOrEmpty(vuser.id)) 
             //不存在 就插入数据
             manager.AddUser(user);
+
+        }
+
+        public static void initOrgUser() {
+            orgUsrManager.InitTable();//初始化表
+            OrganizationUser orgu = new OrganizationUser();
+            orgu.id = "bd9a2123-2151-43cf-b8f0-384dbf763742";
+            orgu.createrTime = System.DateTime.Now;
+            orgu.creater = "ad9a2123-2151-43cf-b8f0-384dbf763741";
+            orgu.orgid = "od9a2123-2151-43cf-b8f0-384dbf763740";
+            orgu.userid = "dd9a2123-2151-43cf-b8f0-384dbf763740";
+            OrganizationUser vorguser = orgUsrManager.Get(orgu.id);//验证当前user是否已经存在
+            if (vorguser == null || string.IsNullOrEmpty(vorguser.id))
+            {
+                //不存在 就插入数据
+                bool res = orgUsrManager.Add(orgu);
+            }
+               
 
         }
     }

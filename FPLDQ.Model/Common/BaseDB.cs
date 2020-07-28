@@ -15,7 +15,7 @@ namespace FPLDQ.Model
                 {
                     ConnectionString = BaseDBConfig.ConnectionString,
                     DbType = DbType.SqlServer,
-                    IsAutoCloseConnection = true,
+                    IsAutoCloseConnection = true,//这个设置为true 后 不需要使用using 和close 
                     InitKeyType = InitKeyType.Attribute
                 }
             );

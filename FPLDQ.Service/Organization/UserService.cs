@@ -11,9 +11,11 @@ using System.Text;
 
 namespace FPLDQ.Service
 {
-    public class UserService : baseService<User>, IUser
+    class UserService : baseService<User>, IUser
     {
         public SimpleClient<User> userClent = new SimpleClient<User>(BaseDB.GetClient());
+
+        #region User 操作类
         /// <summary>
         /// 添加用户
         /// </summary>
@@ -210,12 +212,18 @@ namespace FPLDQ.Service
 
         }
 
+
+        #endregion
+
+
+        #region UserModel 操作类
         /// <summary>
         /// 添加用户
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Add(UserModel model) {
+        public bool Add(UserModel model)
+        {
             //如果为空 返回false
             if (model == null)
                 return false;
@@ -226,7 +234,8 @@ namespace FPLDQ.Service
             if (model.organizationUser == null)
                 return false;
 
-            using (SqlSugarClient db = BaseDB.GetClient()) {
+            using (SqlSugarClient db = BaseDB.GetClient())
+            {
                 try
                 {
                     //db.BeginTran();//开启事务
@@ -239,7 +248,8 @@ namespace FPLDQ.Service
                     db.CommitTran();//提交事务
                     return true;
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     db.RollbackTran();//回滚
                     return false;
                 }
@@ -247,5 +257,82 @@ namespace FPLDQ.Service
 
             }
         }
+
+        /// <summary>
+        /// 获取当前用户信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public UserModel getUserModelById(string id)
+        {
+            using (SqlSugarClient db = BaseDB.GetClient())
+            {
+                try
+                {
+
+                    List<UserModel> res = db.Queryable<User, OrganizationUser>((u, ou) => new object[] {
+                    JoinType.Left,u.id==ou.userid})
+                    .Where((u, ou) => u.id == id)
+                    .Select((u, ou) => new UserModel
+                    {
+                        organizationUser = ou,
+                        user = u
+                    })
+                     
+                    .ToList();
+                    if (res.Count > 0)
+                        return res[0];
+                    else
+                        return null;
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+
+            }
+        }
+
+        /// <summary>
+        /// 通过用户编码查询用户信息
+        /// </summary>
+        /// <param name="userCode"></param>
+        /// <returns></returns>
+        public UserModel getUserModelByCode(string userCode) {
+            using (SqlSugarClient db = BaseDB.GetClient())
+            {
+                try
+                {
+
+                    List<UserModel> res = db.Queryable<User, OrganizationUser>((u, ou) => new object[] {
+                    JoinType.Left,u.id==ou.userid})
+                    .Where((u, ou) => u.userCode == userCode)
+                    .Select((u, ou) => new UserModel
+                    {
+                        organizationUser = ou,
+                        user = u
+                    })
+
+                    .ToList();
+                    if (res.Count > 0)
+                        return res[0];
+                    else
+                        return null;
+
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+
+
+            }
+        }
+       
+        #endregion
+
+
     }
 }

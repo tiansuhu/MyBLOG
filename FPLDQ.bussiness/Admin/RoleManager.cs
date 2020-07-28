@@ -10,7 +10,7 @@ namespace FPLDQ.Bussiness.Admin
 
     public class RoleManager
     {
-        private IRole roleService = new RoleService();
+        private IRole roleService = OrganizationFactory.CreateFactory().GetRoleService();
 
         /// <summary>
         /// 通过id获取角色信息

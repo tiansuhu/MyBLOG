@@ -15,7 +15,7 @@ namespace FPLDQ.InitMyBLOG
         public static void init()
         {
             Organization org = new Organization();
-            org.id = "dd9a2123-2151-43cf-b8f0-384dbf763740";
+            org.id = "od9a2123-2151-43cf-b8f0-384dbf763740";
             org.createrTime = System.DateTime.Now;
             org.creater = "ad9a2123-2151-43cf-b8f0-384dbf763741";
             org.orgCode = "MyCompany";
@@ -23,12 +23,11 @@ namespace FPLDQ.InitMyBLOG
             org.isroot = true;
             //初始化表
             manager.InitTable();
-
-            //User vorgr = manager.(org.id);//验证当前user是否已经存在
-            //if (vuser == null || string.IsNullOrEmpty(vuser.id))
-
-                //插入数据
-                manager.Add(org);
+            Organization vorg = manager.Get(org.id);//验证当前user是否已经存在
+            //不存在就初始化当前数据
+            if (vorg == null || string.IsNullOrEmpty(vorg.id))
+            //插入数据
+            manager.Add(org);
 
         }
     }

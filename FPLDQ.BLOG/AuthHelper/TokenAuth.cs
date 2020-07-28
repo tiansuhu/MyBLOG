@@ -44,11 +44,16 @@ namespace FPLDQ.BLOG.AuthHelper
             var tokenStr = headers["Authorization"];
             try
             {
-                string jwtStr = tokenStr.ToString().Substring("Bearer ".Length).Trim();
+                string jwtStr = tokenStr.ToString().Substring("FPLDQBearer ".Length).Trim();
                 //验证缓存中是否存在该jwt字符串
                 if (!BLOGPIMemoryCache.Exists(jwtStr))
                 {
-                    return httpContext.Response.WriteAsync("非法请求");
+                    Model.ApiResult<bool> apiResult = new Model.ApiResult<bool>();
+                    apiResult.Code = Model.ApiResultStatu.Error;
+                    apiResult.Data = false;
+                    apiResult.Msg = "验证不通过,请求非法路径.";
+                    apiResult.Success = false;
+                    return httpContext.Response.WriteAsync(apiResult.ToString());
                 }
                 TokenModel tm = ((TokenModel)BLOGPIMemoryCache.Get(jwtStr));
                 //提取tokenModel中的Sub属性进行authorize认证
@@ -60,9 +65,14 @@ namespace FPLDQ.BLOG.AuthHelper
                 httpContext.User = principal;
                 return _next(httpContext);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return httpContext.Response.WriteAsync("token验证异常");
+                Model.ApiResult<bool> apiResult = new Model.ApiResult<bool>();
+                apiResult.Code = Model.ApiResultStatu.Error;
+                apiResult.Data = false;
+                apiResult.Msg = "token验证异常:" + ex.StackTrace + " 错误信息+"+ex.Message ;
+                apiResult.Success = false;
+                return httpContext.Response.WriteAsync(apiResult.ToString());
             }
         }
     }

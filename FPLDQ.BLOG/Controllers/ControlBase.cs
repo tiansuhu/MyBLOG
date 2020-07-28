@@ -34,7 +34,7 @@ namespace FPLDQ.BLOG.Controllers
 
             try
             {
-                string jwtStr = tokenStr.ToString().Substring("Bearer ".Length).Trim();
+                string jwtStr = tokenStr.ToString().Substring("FPLDQBearer ".Length).Trim();
                 //验证缓存中是否存在该jwt字符串
                 if (!BLOGPIMemoryCache.Exists(jwtStr))
                 {

@@ -10,5 +10,12 @@ namespace FPLDQ.Model
         public bool Success { get; set; }
         public string Msg { get; set; }
         public T Data { get; set; }
+
+        public override string ToString()
+        {
+            //将当前对象转换成json对象
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+           // return base.ToString();
+        }
     }
 }
